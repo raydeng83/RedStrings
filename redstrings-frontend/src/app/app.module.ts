@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
 import { LandingComponent } from './components/landing/landing.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LandingComponent } from './components/landing/landing.component';
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    LandingComponent
+    LandingComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
