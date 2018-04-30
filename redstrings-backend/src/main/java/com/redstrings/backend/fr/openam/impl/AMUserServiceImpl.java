@@ -5,14 +5,10 @@ import com.redstrings.backend.model.OtpRef;
 import com.redstrings.backend.model.User;
 import com.redstrings.backend.service.OtpRefService;
 import com.redstrings.backend.service.UserService;
-import org.apache.commons.text.StringEscapeUtils;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -21,7 +17,6 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicHeader;
@@ -32,21 +27,21 @@ import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.sql.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class AMUserServiceImpl implements AMUserService {
+    
+    private final String REALM_NAME = "red-strings-dev";
 
     @Value("${openam-server.address}")
     private String openamUrl;
@@ -59,7 +54,8 @@ public class AMUserServiceImpl implements AMUserService {
 
     @Override
     public void createUser(User user) {
-        String createUserUrl = openamUrl+"/json/realms/phoenix-dev/selfservice/userRegistration?_action=submitRequirements";
+        String createUserUrl = openamUrl+"/json/realms/"+REALM_NAME+"/selfservice/userRegistration?_action" +
+                "=submitRequirements";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -88,7 +84,7 @@ public class AMUserServiceImpl implements AMUserService {
 
         String token = null;
 
-        String authenticateUserUrl = openamUrl+"/json/realms/phoenix-dev/authenticate";
+        String authenticateUserUrl = openamUrl+"/json/realms/"+REALM_NAME+"/authenticate";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -182,7 +178,7 @@ public class AMUserServiceImpl implements AMUserService {
     @Override
     public String fetchOIDCToken(String tokenId) {
 
-        String stsUrl = openamUrl+"/rest-sts/phoenix-dev/access_token?_action=translate";
+        String stsUrl = openamUrl+"/rest-sts/"+REALM_NAME+"/access_token?_action=translate";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -233,7 +229,8 @@ public class AMUserServiceImpl implements AMUserService {
 
     @Override
     public String forgetPassword (String username) {
-        String stsUrl = openamUrl+"/json/realms/phoenix-dev/selfservice/forgottenPassword?_action=submitRequirements";
+        String stsUrl = openamUrl+"/json/realms/"+REALM_NAME+"/selfservice/forgottenPassword?_action" +
+                "=submitRequirements";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -286,7 +283,7 @@ public class AMUserServiceImpl implements AMUserService {
 
         String token = null;
 
-        String authenticateUserUrl = openamUrl+"/json/realms/phoenix-dev/authenticate";
+        String authenticateUserUrl = openamUrl+"/json/realms/"+REALM_NAME+"/authenticate";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -332,7 +329,8 @@ public class AMUserServiceImpl implements AMUserService {
     public HashMap googleLogin() {
         JSONObject result = null;
 
-        String googleSocialLoginUrl = openamUrl+"/json/realms/root/realms/phoenix-dev/authenticate?authIndexType" +
+        String googleSocialLoginUrl = openamUrl+"/json/realms/root/realms/"+REALM_NAME+"/authenticate" +
+                "?authIndexType" +
                 "=service&authIndexValue=GoogleSocialAuthenticationService";
 
         String googleSsoUrl = null;
@@ -399,7 +397,8 @@ public class AMUserServiceImpl implements AMUserService {
         String state = map.get("state").toString();
         String ORIG_URL = map.get("ORIG_URL").toString();
 
-        String googleSocialLoginUrl = openamUrl+"/json/realms/root/realms/phoenix-dev/authenticate?service=GoogleSocialAuthenticationService&=&authIndexType=service&authIndexValue=GoogleSocialAuthenticationService&state="+state+"&code="+code+
+        String googleSocialLoginUrl = openamUrl+"/json/realms/root/realms/"+REALM_NAME+"/authenticate?service" +
+                "=GoogleSocialAuthenticationService&=&authIndexType=service&authIndexValue=GoogleSocialAuthenticationService&state="+state+"&code="+code+
         "&authuser=0&session_state="+session_state+"&prompt=none";
 
         String googleSsoUrl = null;
@@ -422,7 +421,7 @@ public class AMUserServiceImpl implements AMUserService {
         jo.put("authuser", 0);
         jo.put("code", code);
         jo.put("prompt", "none");
-        jo.put("realm", "/phoenix-dev");
+        jo.put("realm", "/"+REALM_NAME);
         jo.put("session_state", session_state);
         jo.put("state", state);
         String content = jo.toString();
@@ -512,7 +511,7 @@ public class AMUserServiceImpl implements AMUserService {
     @Override
     public JSONObject accessEvaluation(String resource, String adminTokenId, String tokenId) throws
             UnsupportedEncodingException {
-        String stsUrl = openamUrl+"/json/phoenix-dev/policies?_action=evaluate";
+        String stsUrl = openamUrl+"/json/"+REALM_NAME+"/policies?_action=evaluate";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -564,7 +563,7 @@ public class AMUserServiceImpl implements AMUserService {
 
     @Override
     public JSONObject getOauthToken(String code) {
-        String stsUrl = openamUrl+"/oauth2/realms/phoenix-dev/access_token";
+        String stsUrl = openamUrl+"/oauth2/realms/"+REALM_NAME+"/access_token";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
