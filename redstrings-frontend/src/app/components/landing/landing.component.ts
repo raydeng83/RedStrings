@@ -10,13 +10,25 @@ import {UserService} from "../../services/user.service";
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-
   private serverPath = AppConst.serverPath;
   private loggedIn = false;
-  private issued_token;
+  private issued_token;  
 
   constructor (private loginService: LoginService, private userService: UserService, private router: Router){}
 
+
+  onCheckSession() {
+    this.loginService.checkSession().subscribe(
+      res => {
+        this.loggedIn=res;
+        if(this.loggedIn) {
+          this.router.navigate(['/landing']);
+        }
+      },
+      error => {
+      }
+    );
+  }
 
   onLogout() {
     this.loginService.logout().subscribe(
@@ -29,8 +41,11 @@ export class LandingComponent implements OnInit {
       }
     );
   }
+  
 
   ngOnInit() {
+    this.onCheckSession();
+
   }
 
 }
