@@ -1,0 +1,39 @@
+<div  style="margin: 30px 200px 0 200px">
+    <div><a routerLink="/login" routerLinkActive="active"><- Back</a></div>
+      <div class="panel panel-primary">
+         <div class="panel-body">
+            <form (ngSubmit)="onCreateAccount()">
+               <div *ngIf="userCreated" class="alert alert-success" role="alert">
+                  Your account has been created.
+               </div>
+               <div class="form-group">
+                  <h3>Create account</h3>
+               </div>
+               <div class="form-group">
+                  <label class="control-label" for="firstName">First Name</label>
+                  <input id="firstName" type="text" maxlength="50" class="form-control" class="form-control" name="firstName" [(ngModel)]="user.firstName" required="required" autofocus="autofocus" />
+               </div>
+               <div class="form-group">
+                  <label class="control-label" for="lastName">Last Name</label>
+                  <input id="lastName" type="text" maxlength="50" class="form-control" class="form-control" name="lastName" [(ngModel)]="user.lastName" required="required" />
+               </div>
+               <div class="form-group">
+                  <label class="control-label" for="username">Username</label>
+                  <input id="username" type="text" maxlength="50" class="form-control" class="form-control" name="username" [(ngModel)]="user.username" required="required" />
+               </div>
+               <div class="form-group">
+                  <label class="control-label" for="signupEmail">Email</label>
+                  <input id="signupEmail" type="email" maxlength="50" class="form-control" class="form-control" name="email" [(ngModel)]="user.email" required="required">
+               </div>
+               <div class="form-group">
+                  <label class="control-label" for="signupPassword">Password</label>
+                  <input id="signupPassword" type="password" maxlength="25" class="form-control" placeholder="at least 6 characters" length="40" name="password" [(ngModel)]="user.password" required="required">
+               </div>
+                <div class="form-group">
+                   <button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button>
+                </div>
+            <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our <a href="#">Privacy Policy</a>.</p>
+            </form>
+         </div>
+   </div>
+</div>

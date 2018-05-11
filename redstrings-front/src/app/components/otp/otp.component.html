@@ -1,0 +1,12 @@
+<div style="margin:20px 200px 0 200px">
+	<div *ngIf="passcodeError" style="color:red;">Passcode is not valid</div>
+	<form (ngSubmit)="onSendOtp()">
+		<div class="form-group">
+			<label for="otp">Please Enter Your Code Here: *</label>
+			<input type="text" class="form-control" id="otp" name="otp" [(ngModel)]="passcode" required="required" autofocus="autofocus" />
+			<p style="color: #828282;"> We've sent a passcode to your email address.</p>
+		</div>
+		
+		<button type="submit" class="btn btn-primary btn-block">Submit</button>
+	</form>
+</div>
