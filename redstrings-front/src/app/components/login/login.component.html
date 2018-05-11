@@ -1,4 +1,5 @@
-<div *ngIf="!busy" style="margin:20px 200px 0 200px">
+<app-navbar></app-navbar>
+<div *ngIf="!busy" style="margin:100px 200px 400px 200px;">
 	<div *ngIf="loginError" style="color:red;">Incorrect username or password.</div>
 	<form (ngSubmit)="onLogin()">
 		<div class="form-group">

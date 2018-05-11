@@ -22,15 +22,15 @@ export class ForgetpasswordComponent implements OnInit {
   }
 
   onForgetPassword(){
-  	this.userService.forgetPassword(this.username).subscribe(
-  		res => {
-  			this.emailSent=true;
-  		},
-  		error => {
-  			console.log(error);
-  			this.emailSent=false;
-  		}
-  	);
+    this.userService.forgetPassword(this.username).subscribe(
+      res => {
+        this.emailSent=true;
+      },
+      error => {
+        console.log(error);
+        this.emailSent=false;
+      }
+    );
   }
 
 }

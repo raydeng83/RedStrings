@@ -18,6 +18,7 @@ import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassw
 import { OtpComponent } from './components/otp/otp.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LandingComponent } from './components/landing/landing.component';
     ForgetpasswordComponent,
     OtpComponent,
     RegistrationComponent,
-    LandingComponent
+    LandingComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
