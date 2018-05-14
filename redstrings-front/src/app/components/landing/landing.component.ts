@@ -19,7 +19,7 @@ export class LandingComponent implements AfterViewInit, OnInit {
 
   id: string;    
   public url = 'https://storage.googleapis.com/redstrings-test-bucket/test.mp4';
-   private videoJSplayer: any;
+  private videoJSplayer: any;
 
   constructor (private loginService: LoginService, private userService: UserService, private router: Router){
 
@@ -36,7 +36,7 @@ export class LandingComponent implements AfterViewInit, OnInit {
       },
       error => {
       }
-    );
+      );
   }
 
   onLogout() {
@@ -48,7 +48,7 @@ export class LandingComponent implements AfterViewInit, OnInit {
       error => {
         this.loggedIn=true;
       }
-    );
+      );
   }
   
 
@@ -58,7 +58,7 @@ export class LandingComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-        this.videoJSplayer = videojs(document.getElementById('video_player_id'), {}, () => {
-        });
-}
+    this.videoJSplayer = videojs(document.getElementById('video_player_id'), {}, () => {
+    });
+  }
 }

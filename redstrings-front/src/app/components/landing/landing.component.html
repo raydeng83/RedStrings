@@ -1,31 +1,8 @@
-  <!-- <img src="assets/images/coming.jpg" class="img-fluid" alt="Responsive image"> -->
 
-  <!-- <vg-player>
-    <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
-        <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
-    </video>
-  </vg-player> -->
+<video *ngIf="url" id="video_player_id" oncontextmenu="return false;" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264">
+	
+	<source [src]="url" type="video/mp4" />
+	
+</video>
 
-  <!-- <video  id="player" playsinline controls>
-    <source src="https://00e9e64bac0008eb7114a775cc8d058870d9a470cbd9b5ab66-apidata.googleusercontent.com/download/storage/v1/b/redstrings-test-bucket/o/test.mp4?qk=AD5uMEubgaWKoua4COABR88hBMc6e6N7Ae6MWY-Iuu0n3fmrdQAvTlEN2jWCmNmT0OfQpbs2pnIz0r7oK5578ehAq_l1SgTd0-3cWQG3e3buJkfmI7-kiDyFsuPYhRrxzic1Tn7wksuKV3-LLZJoTkyx-S9V9PLFBtvJgpuHXIaF8ogSA-EJDTVpT6P3RTSuKNt-Bx8pNyh0cD1uqRtacE17givrVmLAxQQc3zXOXtfdF19dueD7tWOJr_ZbUWs3vylV5utGdrY9l6vrudGQ5ic2qxR8mK6FPd8GANRiA1QeNraawJe6lO3EiZzp9ddPlfqop5b7E7NhG210Qa5jykiFDnqcIzle4nlHE7Goa4X7VLidKn94XUpA5AjnjOTxctxFuBM8uX8RsCWFRQEMCKWwrrZfp1EQB5AFyTK_-0zVWPUGdhUwVXFipG3qsfja3MSceQZKz8Ki1DURjpq7QFfnZkXabsdpwNON9sVsfY-vDRd_hgKzlONSO8npBr0qnUOe-TkZk-snoxbflhfjYyEdK6FwsloDWxUTKNRgs9cYYy-jj9kjH8XxAgsCJg8PCsz4w2TGeQ6QqZFdSnWaoMO_YwV_dphw5R8j8VuZujo3-JvujYzqYgKPrXEYh3OXjAG-2l5AhHgvapn_frZxZRcQRLMhizvOvvwaDq4z96-x6G4ZgGM4-p6ku6w7WTX-b8rosa7XcR9EJShG_yNl8-OxhpUoqD187rkQDQ4gsNS4ao4palo9DF4" type="video/mp4">
-</video> -->
-
-<video *ngIf="url" id="video_player_id" oncontextmenu="return false;"
-     class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9"
-     controls preload="auto"  width="640" height="264">
-     
-    <source [src]="url" type="video/mp4" />
-   
-  </video>
-
-  <!-- <video *ngIf="videoUrl" id="video_player_id"
-  class="video-js vjs-big-play-centered"
-  controls preload="auto"
->
-  <source src="{{listing.url}}" type="video/mp4">
-</video>  -->
-
-  <button class="btn btn-warning btn-sm" (click)="onLogout()">Logout</button>
-
- 
-
+<button class="btn btn-warning btn-sm" (click)="onLogout()">Logout</button>
