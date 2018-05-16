@@ -1,0 +1,7 @@
+<div class="container">
+<video *ngIf="url" id="video_player_id" oncontextmenu="return false;" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264">
+	
+	<source [src]="url" type="video/mp4" />
+	
+</video>
+</div>
